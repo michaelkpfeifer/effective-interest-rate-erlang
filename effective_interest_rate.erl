@@ -1,1 +1,2 @@
 -module(effective_interest_rate).
+-compile(export_all).
