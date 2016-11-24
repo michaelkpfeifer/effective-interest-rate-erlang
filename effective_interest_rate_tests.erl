@@ -1,0 +1,2 @@
+-module(effective_interest_rate_tests).
+-include_lib("eunit/include/eunit.hrl").
