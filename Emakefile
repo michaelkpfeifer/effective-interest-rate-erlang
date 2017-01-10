@@ -1,3 +1,5 @@
 {["src/*", "test/*"],
- [{i,"include"}, {outdir, "ebin"}]}.
-
+ [{i,"include"},
+  {outdir, "ebin"},
+  {d, 'TEST'}]
+}.
