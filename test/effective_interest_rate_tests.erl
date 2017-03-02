@@ -23,6 +23,12 @@ effective_interest_rate_for_monthly_payment_test() ->
     EffectiveInterestRate = effective_interest_rate:effective_interest_rate(PaymentsWithDate),
     ?assert(abs(EffectiveInterestRate - 1.91 / 100) < 10.0e-4).
 
+effective_interest_rate_for_simple_real_life_case_test() ->
+    PaymentsWithDate = [{-1065.25, {2011, 4, 21}},
+			{130.69, {2014, 5, 23}}],
+    EffectiveInterestRate = effective_interest_rate:effective_interest_rate(PaymentsWithDate),
+    ?assert(abs(EffectiveInterestRate - (- 0.4931)) < 0.0001).
+
 trivial_convert_to_payments_with_offset_test() ->
     PaymentsWithDate = [{2000, {2015, 6, 1}}],
     PaymentsWithOffset = effective_interest_rate:convert_to_payments_with_offset(PaymentsWithDate),

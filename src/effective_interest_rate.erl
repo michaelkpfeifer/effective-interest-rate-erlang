@@ -9,13 +9,13 @@
 -export([payment_offset/3]).
 -endif.
 
--define(MAX_ITERATIONS_COUNT, 16).
+-define(MAX_ITERATIONS_COUNT, 64).
 -define(MAX_DIFF_ITERATIONS, 10.0e-10).
 
 effective_interest_rate(PaymentsWithDate) ->
     PaymentsWithOffset = convert_to_payments_with_offset(PaymentsWithDate),
     PaymentsWithOffsetDerivative = lists:map(fun(X) -> derive_payment_with_offset(X) end, PaymentsWithOffset),
-    effective_interest_rate(PaymentsWithOffset, PaymentsWithOffsetDerivative, 0, 0.0).
+    effective_interest_rate(PaymentsWithOffset, PaymentsWithOffsetDerivative, 0, -0.75).
 
 effective_interest_rate(_, _, ?MAX_ITERATIONS_COUNT, Iteration) ->
     Iteration;
@@ -40,7 +40,7 @@ effective_interest_rate(PaymentsWithOffset,
 evaluate(Terms, X) ->
     lists:foldl(fun(Term, Sum) ->
                         {Amount, Offset} = Term,
-                        Sum + Amount * math:pow((1 + X), -Offset)
+			Sum + Amount * math:pow((1 + X), -Offset)
                 end,
                 0,
                 Terms).
