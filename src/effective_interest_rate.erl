@@ -48,7 +48,7 @@ evaluate(Terms, X) ->
 
 convert_to_payments_with_offset(PaymentsWithDate) ->
     {_, FirstPaymentDate} = first_payment_with_date(PaymentsWithDate),
-    FirstPaymentOffset = payment_offset_in_year(FirstPaymentDate),
+    FirstPaymentOffset = offset_in_year(FirstPaymentDate),
     {FirstPaymentYear, _, _} = FirstPaymentDate,
     lists:map(fun(X) -> convert_to_payment_with_offset(X, FirstPaymentYear, FirstPaymentOffset) end, PaymentsWithDate).
 
@@ -74,7 +74,7 @@ first_payment_with_date(PaymentWithDate, [NextPaymentWithDate | NextRemainingPay
     end.
 
 
-payment_offset_in_year(PaymentDate) ->
+offset_in_year(PaymentDate) ->
     {Year, _, _} = PaymentDate,
     GregorianDaysJanFirst = calendar:date_to_gregorian_days({Year, 1, 1}),
     GregorianDaysNow = calendar:date_to_gregorian_days(PaymentDate),
@@ -92,7 +92,7 @@ payment_offset(PaymentWithDate, FirstPaymentYear, FirstPaymentOffset) ->
     {_, PaymentDate} = PaymentWithDate,
     {Year, _, _} = PaymentDate,
     YearDifference = Year - FirstPaymentYear,
-    PaymentOffsetInYear = payment_offset_in_year(PaymentDate),
+    PaymentOffsetInYear = offset_in_year(PaymentDate),
     PaymentOffsetInYear + YearDifference - FirstPaymentOffset.
 
 
