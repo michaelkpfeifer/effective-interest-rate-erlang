@@ -39,3 +39,12 @@ Eshell V9.0  (abort with ^G)
 4>
 
 ```
+
+# Tests
+
+Simply run
+
+    $ make tests
+
+
+to run the tests.
